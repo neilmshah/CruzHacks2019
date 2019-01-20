@@ -14,5 +14,10 @@ For the imitation learning, the initial autonomous self-driving car model is not
 ## What's next for CrowdLearning
 Turn this into a full-fledged online app crowd play where 1000+ users would join in to play the simulation and help model reinforcement.
 
-
-
+## Set-up and Running RL
+1. Clone the repo.
+2. Download the simulator from the following link : https://drive.google.com/open?id=1aG-NwW_NK8FGET_EBApdHBpxSHwG4EkQ
+3. Use the pretrained model from : model.h5
+4. Spin up the behaviour clone nerual network using `python3 drive.py model.h5`.
+5. Start the simulator and choose Autonomous driving.
+6. Use Left and Right arrow keys to improve the movement of the car to get rewards.
