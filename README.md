@@ -25,6 +25,6 @@ Turn this into a full-fledged online app crowd play where 1000+ users would join
 
 ## Behind the scenes 
 
-![Alt text](ScreenShots/Architecture.png?raw=true "Architecture Diagram")
+![Alt text](ScreenShots/hedera.png.png?raw=true "Architecture Diagram")
 
 The micropayment service API is hosted on AWS with autoscaling feature based on the CPU load. The front end requests (be it any business model) reach the go service which validates the operator account, target account and the transaction amount. In future, the idea is to orchestrate via Kubernetes and scale it in enterprise level load.
