@@ -21,3 +21,10 @@ Turn this into a full-fledged online app crowd play where 1000+ users would join
 4. Spin up the behaviour clone nerual network using `python3 drive.py model.h5`.
 5. Start the simulator and choose Autonomous driving.
 6. Use Left and Right arrow keys to improve the movement of the car to get rewards.
+
+
+## Behind the scenes 
+
+![Alt text](ScreenShots/Architecture.png?raw=true "Architecture Diagram")
+
+The micropayment service API is hosted on AWS with autoscaling feature based on the CPU load. The front end requests (be it any business model) reach the go service which validates the operator account, target account and the transaction amount. In future, the idea is to orchestrate via Kubernetes and scale it in enterprise level load.
