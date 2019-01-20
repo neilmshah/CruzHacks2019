@@ -18,10 +18,12 @@ class NewHacks extends Component {
     }
 
     subscribe = (e)=>{
-        const url="http://34.197.246.53:3000/pay"
+        //const url="http://34.197.246.53:3000/pay";
+        const url="http://hedera-1120230117.us-east-1.elb.amazonaws.com:3000/pay"
         axios.post(url).then((response)=>{
             if(response.status===200){
-                alert("We successfully received your payment")
+                const balance = response.data.balance;
+                alert("We successfully received your payment. Your balance is "+balance+" HBR")
                 this.setState({subscribed:true})
             }else{
                 alert("Hedera couldn't process your payment")
