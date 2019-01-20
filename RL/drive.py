@@ -19,6 +19,7 @@ from keras import __version__ as keras_version
 import math
 from numpy import genfromtxt
 import grequests
+import requests
 from threading import Thread
 #from sklearn.linear_model import LinearRegression
 #from tf_model import get_model
@@ -39,6 +40,14 @@ def get_max(t1,t2):
     else:
         return 0
 
+def get_diff(t1,t2):
+    diff = math.fabs(t1-t2)
+    return diff
+
+def get_z_dif(t1,t2):
+    diff = math.fabs(t1[2]-t2[2])
+    return diff
+
 def get_best_dist(d):
     my_data = genfromtxt('regression.csv', delimiter=',')
     input_data = my_data[:,0]
@@ -51,11 +60,12 @@ def get_best_dist(d):
 
 def make_call():
     #r = requests.post('http://169.233.112.37:3000/pay')
-    urls = ['http://169.233.112.37:3000/pay']
+    #urls = ['http://127.0.0.1:3000/pay']
+    urls = ['http://3.86.171.28:3000/pay']
     unsent_request = (grequests.post(url) for url in urls)
     results = grequests.map(unsent_request)
     for result in results:
-        print("Updated Balance : "+result.content.decode('utf-8'))
+        print(result.content)
 
 
 def save_image(image,steering_angle):
@@ -106,6 +116,7 @@ def telemetry(sid, data):
     if data:
         pos = data["position"].replace("(","").replace(")","").replace(",","").split(" ")
         pos = [float(i) for i in pos]
+        #print(pos)
         if controller.first_frame:
             controller.init_pos = pos
             controller.start_time = time.time()
@@ -120,11 +131,16 @@ def telemetry(sid, data):
                 #print(dist)
                 #with open('regression_better.csv','a') as f:
                     #f.write(str(controller.sec)+","+str(dist)+"\n")
-                    
+                
+                print(get_z_dif(controller.init_pos,pos))
+
                 if get_max(actual_dist,dist) == 1 and np.random.uniform(0,1) > epsilon:
-                    print("Model Improved! Receiving Micropayment")
+                    print("Model Improved! Sending Micropayment")
                     threaded = Thread(target = make_call,args = (),daemon=True)
                     threaded.start()
+                elif get_diff(actual_dist,dist) > 2.0 :#get_z_dif(controller.init_pos,pos):
+                    print(get_diff(actual_dist,dist))
+                    print("Negative Reinforcement! Receiving Micropayment")
                     
                 controller.sec +=1
                 controller.init_pos = pos
