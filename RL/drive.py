@@ -18,7 +18,8 @@ import h5py
 from keras import __version__ as keras_version
 import math
 from numpy import genfromtxt
-import requests
+import grequests
+from threading import Thread
 #from sklearn.linear_model import LinearRegression
 #from tf_model import get_model
 
@@ -47,6 +48,15 @@ def get_best_dist(d):
             return output_data[i]
     
     return 0.0
+
+def make_call():
+    #r = requests.post('http://169.233.112.37:3000/pay')
+    urls = ['http://169.233.112.37:3000/pay']
+    unsent_request = (grequests.post(url) for url in urls)
+    results = grequests.map(unsent_request)
+    for result in results:
+        print("Updated Balance : "+result.content.decode('utf-8'))
+
 
 def save_image(image,steering_angle):
     now = datetime.datetime.now()
@@ -85,7 +95,7 @@ class SimplePIController:
 
 controller = SimplePIController(0.1, 0.002)
 set_speed = 9.0
-epsilon = 0.85
+epsilon = 0.75
 controller.set_desired(set_speed)
 
 @sio.on('telemetry')
@@ -106,15 +116,16 @@ def telemetry(sid, data):
             if time_diff >= 1:
                 dist = get_displacement(controller.init_pos,pos)
                 actual_dist = get_best_dist(controller.sec)
-                print(actual_dist)
-                print(dist)
-                #with open('regression.csv','a') as f:
+                #print(actual_dist)
+                #print(dist)
+                #with open('regression_better.csv','a') as f:
                     #f.write(str(controller.sec)+","+str(dist)+"\n")
-                if get_max(actual_dist,dist) == 1:
-                    print("1")
-                    #r = requests.get('34.197.246.53:3000/pay')
-                    #print(r)
-
+                    
+                if get_max(actual_dist,dist) == 1 and np.random.uniform(0,1) > epsilon:
+                    print("Model Improved! Receiving Micropayment")
+                    threaded = Thread(target = make_call,args = (),daemon=True)
+                    threaded.start()
+                    
                 controller.sec +=1
                 controller.init_pos = pos
                 controller.start_time = curr
