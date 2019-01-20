@@ -27,4 +27,4 @@ Turn this into a full-fledged online app crowd play where 1000+ users would join
 
 ![Alt text](ScreenShots/hedera.png?raw=true "hedera")
 
-The micropayment service API is hosted on AWS with autoscaling feature based on the CPU load. The business model requests reach the go service which validates the operator account, target account and the transaction amount. In future, the idea is to orchestrate via Kubernetes and scale it in enterprise level load.
+The micropayment service API is hosted on AWS with autoscaling feature based on the CPU load. The requests from the business models reach the API service, which validates the operator account, target account and the transaction amount. In future, the idea is to orchestrate via Kubernetes and scale it in enterprise level load.
