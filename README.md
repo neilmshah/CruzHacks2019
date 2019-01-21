@@ -1,4 +1,5 @@
-# CruzHacks2019
+# CruzHacks2019(Winner)
+Check out us on [Dev Post](https://devpost.com/software/outsource-learning-powered-by-hedera)
 
 ## Inspiration
 Looking at Amazon Turk, and how they crowdsource labeling for their datasets, we wanted to aim at a similar crowdsourcing model for reinforcement learning where imitation learning could be outsourced to the public and users could be rewarded with micropayments each time they successfully improved an existing model. This could very well turn into an App Crowd play system similar to Twitch live gaming. For example, if we were using autonomous self-driving car simulations, we could run an autonomous race league where 1000's of users would participate and compete (while training our model) and turn the event into a "Gamified micropayments for model reinforcement".
