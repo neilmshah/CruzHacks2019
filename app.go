@@ -34,7 +34,7 @@ func GetMyBalance(w http.ResponseWriter, r *http.Request) {
 
     client.SetNode(hedera.AccountID{Account: 3})
     client.SetOperator(accountID, func() hedera.SecretKey {
-        operatorSecret, err := hedera.SecretKeyFromString("302e020100300506032b6570042204203679be2337f73210d59675f768f78d9f701a8a1015df41d84685b640b53edf56")
+        operatorSecret, err := hedera.SecretKeyFromString("<SECRET_KEY>")
         if err != nil {
             panic(err)
         }
@@ -61,7 +61,7 @@ func GetMyBalance(w http.ResponseWriter, r *http.Request) {
 func TransferTokens(w http.ResponseWriter, r *http.Request) {
     // Read and decode the operator secret key
     operatorAccountID := hedera.AccountID{Account: 1001}
-    operatorSecret, err := hedera.SecretKeyFromString("302e020100300506032b6570042204203679be2337f73210d59675f768f78d9f701a8a1015df41d84685b640b53edf56")
+    operatorSecret, err := hedera.SecretKeyFromString("<SECRET_KEY>")
     if err != nil {
         panic(err)
     }
