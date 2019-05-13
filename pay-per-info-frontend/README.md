@@ -6,9 +6,9 @@ Earlier micro payments were not a rage because of transaction cost attached to i
 
 
 #### Contributors
-- (Arihant Sai)[https://github.com/Arihant1467]
-- (Mudambi Srinivas)[https://github.com/mssrinivas]
-- (Neil Shah)[https://github.com/neilmshah]
-- (Shabari Girish)[https://github.com/shabari8695]
+- [Arihant Sai](https://github.com/Arihant1467)
+- [Mudambi Srinivas](https://github.com/mssrinivas)
+- [Neil Shah](https://github.com/neilmshah)
+- [Shabari Girish](https://github.com/shabari8695)
 
 This project was presented at [Cruz Hacks 2019](https://www.cruzhacks.com/)
